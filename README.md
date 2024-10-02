@@ -1,4 +1,4 @@
-This folder contains the two benchmarks we constructed for evaluating ExploraCoder and its baselines' performance on multi-API invocations.
+This repo contains the two benchmarks we constructed for evaluating ExploraCoder and its baselines' performance on multi-API invocations.
  (1) Torchdata-Github
  (2) Torchdata-Manual
 
