@@ -8,4 +8,4 @@ On each dataset, we provide:
 - canonical solution for the problem (entry 'canonical_solution')
 - test csaes for problem (entry 'test')
 
-In the data files, we only provide 5 samples per benchmark. Full data along with code implementation will be released after paper being accepted. Implementation details can be found in our paper.
+In the data files, we currently provide partial data samples. Full data along with code implementation will be released after paper being accepted. Implementation details can be found in our paper.
