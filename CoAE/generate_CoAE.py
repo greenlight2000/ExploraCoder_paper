@@ -133,7 +133,7 @@ def generate_exploration(testset, external_data_source, ar_results, ar_field, co
                 if code_snippets[0] == '':
                     continue    
 
-                # 2. Reward Calculation(Rollout): 
+                # 2. Reward Calculation: 
                 logging.info(f'start exploring the candidates cot code for subtask {subtask_id}')
                 cot_tree_records:Dict[List[dict]] = defaultdict(list)
                 for candidate_id, code in enumerate(code_snippets, start=1):

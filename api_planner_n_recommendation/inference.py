@@ -49,7 +49,6 @@ def adaretrieve(results_path):
 def decompretrieve_pipeline(results_path):
     es.load_examples()
     retriever.load_apis()
-    #清空文件
     with open(results_path, 'w') as f:
         f.write('')
 
