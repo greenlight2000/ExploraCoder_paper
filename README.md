@@ -1,6 +1,6 @@
-This repo contains core algorithm implementations of ExploraCoder and the [Torchdata-Manual](./datasets/torchdata_manual.json) benchmark we constructed for evaluating ExploraCoder and its baselines' performance on multi-API invocations. Some case studies from our paper regarding different approaches solving one example task are also provided at [example.md](./example.md).
+This repo contains core algorithm implementations of [ExploraCoder](./) and the [Torchdata-Manual](./datasets/Torchdata_Manual.json) benchmark we constructed for evaluating ExploraCoder and its baselines' performance on multi-API invocations. Some case studies from our paper regarding different approaches solving one example task are also provided at [example.md](./example.md).
 
-In the provided Torchdata-Manual and Torchdata-Github benchmarks, the entries represent:
+In the provided Torchdata-Manual, Torchdata-Github, MonkBeat-Eval benchmarks, the entries represent:
 - task requirement (entry 'task')
 - full programming problem. including task requirement and code context (entry 'prompt') 
 - canonical solution for the problem (entry 'canonical_solution')
