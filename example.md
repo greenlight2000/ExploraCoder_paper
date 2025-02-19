@@ -252,7 +252,7 @@ First of all, CAPIR's reranking mechanism successfully recall more accurate APIs
 incorrectly assumes that Torchdata APIs can be chained using ">>", and this incorrect API usage pattern propagates throughout the entire LLM-decoded API invocation sequence. Despite receiving clear error messages in each round of Self-Repair, the system fails to correct the code because its initial
 solution deviates significantly from the canonical implementation.
 
-## ReAct (failed)
+## ReAct Code Agent (failed)
 We implement a ReAct Agent that reactively generate thoughts and actions to complete the task. We **additionally** instruct with trajectory example to guide the LLM to **generate partial code at each steps**. This is to examine **whether existing agentic methods can enforce the step-wise code construction feature** that we propose. The action space of ReAct Agent are:
 1. Retrieve: Retrieve APIs with clearly described target functionality (such as a subtask in the coding task) from Torchdata API documentation and return the top-5 relevant API infomation.
 2. Write: Write your temporary code snippet and execute it, the execution result will be returned. You don't need to impelement all requirement in the function at once, just write a temporary code snippet to test the partial subtask-wise functionality.
@@ -682,14 +682,14 @@ def build_text_data_pipe(
 Observation: Solution is INCORRECT
 ```
 ### Analysis:
-At step 1-3, ReAct attempted to implement a partial functionality of “read files and aggregate lines”, with a trajectory of Retrieve-Implement-Debug. Although this is an temptation for planning step-wise code construction, we can observe such reactive planning style lack the systematic perspective and prior knowledge for the reasonable dependencies among subtask, resulting in an overly complex subtask that involve multiple Torchdata operations—read file(inherently involving FileLister and FileOpener two Torchdata APIs) and aggregate lines(missing a prior step of read file into lines). 
+At step 1-3, ReAct Agent attempted to implement a partial functionality of “read files and aggregate lines”, with a trajectory of Retrieve-Implement-Debug. Although this is an temptation for planning step-wise code construction, we can observe such reactive planning style lack the systematic perspective and prior knowledge for the reasonable dependencies among subtask, resulting in an overly complex subtask that involve multiple Torchdata operations—read file(inherently involving FileLister and FileOpener two Torchdata APIs) and aggregate lines(missing a prior step of read file into lines). 
 As a result, the outcome from step 1-3 is a complicated buggy code that (1) misuse the OnlineReader (2) hallucinated a joiner parameters for ParagraphAggregator.
 
-The limitation of reactive planning lies in its **bug-driven nature**. In step 4 ReAct  tried to solve the bug “NameError: name 'lines_to_paragraphs' is not defined”, which derived from the hallucinated parameter, by introducing another hallucination: it implemented a lines_to_paragraphs method itself. This directly leads to a series of ineffective and meaningless debugging in step 4-8.
+The limitation of reactive planning lies in its **bug-driven nature**. In step 4 ReAct Agent tried to solve the bug “NameError: name 'lines_to_paragraphs' is not defined”, which derived from the hallucinated parameter, by introducing another hallucination: it implemented a lines_to_paragraphs method itself. This directly leads to a series of ineffective and meaningless debugging in step 4-8.
 
-Another issue of agentic workflows is their **uncontrollable stepping**. ReAct fell into looped action of retrieving “data format handling APIs in Torchdata” from Torchdata library in Step 10 and step 12, which increase the computational costs and produce no meaningful knowledge gain.
+Another issue of agentic workflows is their **uncontrollable stepping**. ReAct Agent fell into looped action of retrieving “data format handling APIs in Torchdata” from Torchdata library in Step 10 and step 12, which increase the computational costs and produce no meaningful knowledge gain.
 
-In the end, ReAct produce an incorrect solution. This shows that **reactive planning is not enough in unseen library exploration** and **agentic workflow is ineffective/unstable for the step-wise code construction**.
+In the end, ReAct Agent produce an incorrect solution. This shows that **reactive planning is not enough in unseen library exploration** and **agentic workflow is ineffective/unstable for the step-wise code construction**.
 
 
 ## ExploraCoder (success)
