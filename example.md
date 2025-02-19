@@ -26,7 +26,7 @@ def build_text_data_pipe(
     """
 ```
 ---
-Following are the inference processes of varying-styled approaches (including [Standard RAG](#docprompting-failed), [Iterative Debugging](#capir--self-repair-failed), [Agentic](#react-failed), [ExploraCoder](#exploracoder-success)) trying to solve this example problem.
+Following are the inference processes of varying-styled approaches (including [Standard RAG](#docprompting-failed), [Iterative Debugging](#capir--self-repair-failed), [Agentic](#react-code-agent-failed), [ExploraCoder](#exploracoder-success)) trying to solve this example problem.
 ## Docprompting (failed)
 The retrieved APIs are:
 ```
