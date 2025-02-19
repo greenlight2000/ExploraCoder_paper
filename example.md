@@ -253,7 +253,7 @@ incorrectly assumes that Torchdata APIs can be chained using ">>", and this inco
 solution deviates significantly from the canonical implementation.
 
 ## ReAct Code Agent (failed)
-We implement a ReAct Agent that reactively generate thoughts and actions to complete the task. We **additionally** instruct with trajectory example to guide the LLM to **generate partial code at each steps**. This is to examine **whether existing agentic methods can enforce the step-wise code construction feature** that we propose. The action space of ReAct Agent are:
+We implement the ReAct Agent that reactively generate thoughts and actions to complete the task. We **additionally** instruct with trajectory example to guide the LLM to **generate partial code at each steps**. This is to examine **whether existing agentic methods can enforce the step-wise code construction feature** that we propose. The action space of ReAct Agent are:
 1. Retrieve: Retrieve APIs with clearly described target functionality (such as a subtask in the coding task) from Torchdata API documentation and return the top-5 relevant API infomation.
 2. Write: Write your temporary code snippet and execute it, the execution result will be returned. You don't need to impelement all requirement in the function at once, just write a temporary code snippet to test the partial subtask-wise functionality.
 3. Finish: Write the complete code solution that solves the provided coding task.  
