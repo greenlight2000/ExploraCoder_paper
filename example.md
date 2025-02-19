@@ -253,7 +253,7 @@ incorrectly assumes that Torchdata APIs can be chained using ">>", and this inco
 solution deviates significantly from the canonical implementation.
 
 ## ReAct (failed)
-ReAct reactively generate thoughts and actions to complete the task. We **additionally** instruct with trajectory example to guide the LLM to **generate partial code at each steps**. This is to examine **whether existing agentic methods can enforce the step-wise code construction feature** that we propose. The action space of ReAct Agent are:
+We implement a ReAct Agent that reactively generate thoughts and actions to complete the task. We **additionally** instruct with trajectory example to guide the LLM to **generate partial code at each steps**. This is to examine **whether existing agentic methods can enforce the step-wise code construction feature** that we propose. The action space of ReAct Agent are:
 1. Retrieve: Retrieve APIs with clearly described target functionality (such as a subtask in the coding task) from Torchdata API documentation and return the top-5 relevant API infomation.
 2. Write: Write your temporary code snippet and execute it, the execution result will be returned. You don't need to impelement all requirement in the function at once, just write a temporary code snippet to test the partial subtask-wise functionality.
 3. Finish: Write the complete code solution that solves the provided coding task.  
@@ -687,9 +687,9 @@ As a result, the outcome from step 1-3 is a complicated buggy code that (1) misu
 
 The limitation of reactive planning lies in its **bug-driven nature**. In step 4 ReAct  tried to solve the bug “NameError: name 'lines_to_paragraphs' is not defined”, which derived from the hallucinated parameter, by introducing another hallucination: it implemented a lines_to_paragraphs method itself. This directly leads to a series of ineffective and meaningless debugging in step 4-8.
 
-Another issue of reactive agents are its **uncontrollable stepping**. ReAct fell into looped action of retrieving “data format handling APIs in Torchdata” from Torchdata library in Step 10 and step 12, which increase the computational costs.
+Another issue of agentic workflows is their **uncontrollable stepping**. ReAct fell into looped action of retrieving “data format handling APIs in Torchdata” from Torchdata library in Step 10 and step 12, which increase the computational costs and produce no meaningful knowledge gain.
 
-In the end, ReAct produce an incorrect solution. This show that **reactive planning is not enough** and **agentic workflow is ineffective/unstable for the step-wise code construction**.
+In the end, ReAct produce an incorrect solution. This shows that **reactive planning is not enough in unseen library exploration** and **agentic workflow is ineffective/unstable for the step-wise code construction**.
 
 
 ## ExploraCoder (success)
